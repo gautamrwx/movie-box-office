@@ -1,15 +1,29 @@
 import React, { useState } from 'react';
 import MainPageLayout from '../components/MainPageLayout';
+import { apiGet } from '../misc/config';
 
 const Home = () => {
   const [input, setInput] = useState('');
+  const [results, setresults] = useState(null);
 
   const onSearch = () => {
-    fetch(`http://api.tvmaze.com/search/shows?q=${input}`)
-      .then(r => r.json())
-      .then(result => {
-        console.log(result);
-      });
+    apiGet(`/search/shows?q=${input}`).then(result => {
+      setresults(result);
+    });
+  };
+
+  const renderResult = () => {
+    if (results && results.length === 0) {
+      return <div>No Results</div>;
+    }
+
+    if (results && results.length > 0) {
+      return results.map(item => (
+        <div key={item.show.id}>{item.show.name}</div>
+      ));
+    }
+
+    return null;
   };
 
   const onSearchBoxChange = ev => {
@@ -33,6 +47,8 @@ const Home = () => {
       <button type="button" onClick={onSearch}>
         Click Me
       </button>
+
+      {renderResult()}
     </MainPageLayout>
   );
 };
