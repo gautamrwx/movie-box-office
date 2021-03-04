@@ -1,18 +1,21 @@
 import React from 'react';
+import { StyledActorCard } from './ActorCard.styled';
 
 const ActorCard = ({ image, name, gender, country, birthday }) => {
   return (
-    <div>
-      <div>
+    <StyledActorCard>
+      <div className="img-wrapper">
         <img src={image} alt="Person_Image" />
       </div>
       <h1>
         {name}
         {gender ? `(${gender})` : null}
       </h1>
-      <p>{country ? `Comes from ${country}` : 'Country Not Known'}</p>
+      <p className="country-style">
+        {country ? `Comes from ${country}` : 'Country Not Known'}
+      </p>
       {birthday ? <p>Born {birthday}</p> : null}
-    </div>
+    </StyledActorCard>
   );
 };
 

@@ -17,10 +17,6 @@ const Home = () => {
     });
   };
 
-  const onRadioChange = ev => {
-    setSearchOption(ev.target.value);
-  };
-
   const onSearchBoxChange = ev => {
     setInput(ev.target.value);
   };
@@ -29,6 +25,10 @@ const Home = () => {
     if (ev.keyCode === 13) {
       onSearch();
     }
+  };
+
+  const onRadioChange = ev => {
+    setSearchOption(ev.target.value);
   };
 
   const renderResult = () => {
@@ -62,7 +62,7 @@ const Home = () => {
         <input
           id="shows-search"
           type="radio"
-          value="show"
+          value="shows"
           checked={isShowsSelected}
           onChange={onRadioChange}
         />
