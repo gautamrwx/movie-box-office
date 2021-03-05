@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { NavList, LinkStyled } from './Navs.styled';
 
 const LINKS = [
   { to: '/', text: 'Home' },
@@ -7,15 +8,22 @@ const LINKS = [
 ];
 
 function Navigator() {
+  const location = useLocation();
+
   return (
     <div>
-      <ul>
-        {LINKS.map(link => (
-          <li key={link.to}>
-            <Link to={link.to}>{link.text}</Link>
+      <NavList>
+        {LINKS.map(item => (
+          <li key={item.to}>
+            <LinkStyled
+              to={item.to}
+              className={item.to === location.pathname ? 'active' : ''}
+            >
+              {item.text}
+            </LinkStyled>
           </li>
         ))}
-      </ul>
+      </NavList>
     </div>
   );
 }
